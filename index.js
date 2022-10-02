@@ -5,10 +5,10 @@ const app = express();
 app.use(express.json());
 
 const genres = [
-  { id: 1, genre: "Comedy" },
-  { id: 2, genre: "Thriller" },
-  { id: 3, genre: "Action" },
-  { id: 4, genre: "Animation" },
+  { id: 1, name: "Comedy" },
+  { id: 2, name: "Thriller" },
+  { id: 3, name: "Action" },
+  { id: 4, name: "Animation" },
 ];
 
 app.get("/", (req, res) => {
@@ -37,6 +37,18 @@ app.post("/vidflix.com/api/genres", (req, res) => {
   };
 
   genres.push(genre);
+  res.send(genre);
+});
+
+app.put("/vidflix.com/api/genres/:id", (req, res) => {
+  const genre = genres.find((g) => g.id === parseInt(req.params.id));
+  if (!genre) return res.status(404).send("Genre with that ID not found");
+
+  const { error } = validateGenre(req.body);
+
+  if (error) return res.status(400).send(error.details[0].message);
+
+  genre.name = req.body.name;
   res.send(genre);
 });
 
