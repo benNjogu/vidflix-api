@@ -52,6 +52,16 @@ app.put("/vidflix.com/api/genres/:id", (req, res) => {
   res.send(genre);
 });
 
+app.delete("/vidflix.com/api/genres/:id", (req, res) => {
+  const genre = genres.find((g) => g.id === parseInt(req.params.id));
+  if (!genre) return res.status(404).send("Genre with that ID not found");
+
+  const index = genres.indexOf(genre);
+  genres.splice(index, 1);
+
+  res.send(genre);
+});
+
 function validateGenre(genre) {
   const schema = Joi.object({
     name: Joi.string().min(3).required(),
