@@ -18,5 +18,12 @@ app.get("/vidflix.com/api/genres", (req, res) => {
   res.send(genres);
 });
 
+app.get("/vidflix.com/api/genres/:id", (req, res) => {
+  const genre = genres.find((g) => g.id === parseInt(req.params.id));
+  if (!genre) return res.status(404).send("Genre with that ID not found");
+
+  res.send(genre);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
