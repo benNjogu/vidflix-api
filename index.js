@@ -1,8 +1,14 @@
+const mongoose = require("mongoose");
 const home = require("./routes/home");
 const genres = require("./routes/genres");
 const express = require("express");
-
 const app = express();
+
+mongoose
+  .connect("mongodb://localhost/vidflix")
+  .then(() => console.log("Connected to the database..."))
+  .catch((err) => console.error("Could not connect to the database...", err));
+
 app.use(express.json());
 app.use("/", home);
 app.use("/vidflix.com/api/genres", genres);
