@@ -2,4 +2,4 @@ const mongoose = require("mongoose");
 
 const id = new mongoose.Types.ObjectId();
 
-console.log(id); //->6346a83fd79869c44486cb1e
+console.log(id.getTimestamp()); //->2022-10-12T11:46:01.000Z
