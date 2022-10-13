@@ -6,6 +6,7 @@ const genres = require("./routes/genres");
 const customers = require("./routes/customers");
 const movies = require("./routes/movies");
 const rentals = require("./routes/rentals");
+const users = require("./routes/users");
 const express = require("express");
 const app = express();
 
@@ -20,6 +21,7 @@ app.use("/vidflix.com/api/genres", genres);
 app.use("/vidflix.com/api/customers", customers);
 app.use("/vidflix.com/api/movies", movies);
 app.use("/vidflix.com/api/rentals", rentals);
+app.use("/vidflix.com/api/users", users);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
