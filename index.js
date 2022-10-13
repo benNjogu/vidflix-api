@@ -18,12 +18,12 @@ mongoose
 
 app.use(express.json());
 app.use("/", home);
-app.use("/vidflix.com/api/genres", genres);
-app.use("/vidflix.com/api/customers", customers);
-app.use("/vidflix.com/api/movies", movies);
-app.use("/vidflix.com/api/rentals", rentals);
-app.use("/vidflix.com/api/users", users);
-app.use("/vidflix.com/api/auth", auth);
+app.use("/vidflix/api/genres", genres);
+app.use("/vidflix/api/customers", customers);
+app.use("/vidflix/api/movies", movies);
+app.use("/vidflix/api/rentals", rentals);
+app.use("/vidflix/api/users", users);
+app.use("/vidflix/api/auth", auth);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
