@@ -1,6 +1,7 @@
 const { User } = require("../models/user");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
+const Joi = require("joi");
 const express = require("express");
 const router = express.Router();
 
@@ -23,7 +24,7 @@ function validate(req) {
     password: Joi.string().min(6).max(1024).required(),
   });
 
-  return schema.validate(user);
+  return schema.validate(req);
 }
 
 module.exports = router;
