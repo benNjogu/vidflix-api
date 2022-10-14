@@ -1,3 +1,4 @@
+require("express-async-errors");
 const Joi = require("joi");
 Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
@@ -9,6 +10,7 @@ const movies = require("./routes/movies");
 const rentals = require("./routes/rentals");
 const users = require("./routes/users");
 const auth = require("./routes/auth");
+const error = require("./middleware/error");
 const express = require("express");
 const app = express();
 
@@ -30,6 +32,8 @@ app.use("/vidflix/api/movies", movies);
 app.use("/vidflix/api/rentals", rentals);
 app.use("/vidflix/api/users", users);
 app.use("/vidflix/api/auth", auth);
+
+app.use(error);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`listening on port ${port}`));
