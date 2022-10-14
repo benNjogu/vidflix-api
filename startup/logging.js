@@ -13,7 +13,13 @@ module.exports = function () {
     process.exit(1);
   });
 
-  winston.add(new winston.transports.Console({ filename: "logfile.log" }));
+  winston.add(
+    new winston.transports.Console({
+      colorize: true,
+      prettyPrint: true,
+      filename: "logfile.log",
+    })
+  );
   //winston.add(new winston.transports.File({ filename: "logfile.log" }));
   winston.add(
     new winston.transports.MongoDB({
