@@ -14,6 +14,7 @@ module.exports = function () {
   });
 
   winston.add(new winston.transports.Console({ filename: "logfile.log" }));
+  winston.add(new winston.transports.File({ filename: "logfile.log" }));
   winston.add(
     new winston.transports.MongoDB({
       db: "mongodb://localhost/vidflix",
