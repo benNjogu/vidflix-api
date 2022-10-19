@@ -20,6 +20,8 @@ describe("absolute", () => {
 describe("greet", () => {
   it("should return the greeting message", () => {
     const result = ground.greet("Ben");
-    expect(result).toBe("Welcome Ben");
+    expect(result).toMatch(/Ben/);
+    //alternatively,
+    expect(result).toContain("Ben");
   });
 });
