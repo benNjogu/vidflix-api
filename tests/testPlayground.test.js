@@ -17,3 +17,9 @@ describe("absolute", () => {
   });
 });
 
+describe("greet", () => {
+  it("should return the greeting message", () => {
+    const result = ground.greet("Ben");
+    expect(result).toBe("Welcome Ben");
+  });
+});
