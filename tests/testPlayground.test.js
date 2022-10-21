@@ -58,3 +58,23 @@ describe("getProduct", () => {
     expect(result).toHaveProperty("id", 1);
   });
 });
+
+
+describe("registerUser", () => {
+  it("should throw if user name is falsy", () => {
+    /**
+     * falsy values in js
+     * Null, undefined, NaN, 0, false, ''
+     */
+    const args = [null, undefined, NaN, "", 0, false];
+    args.forEach((a) => {
+      expect(() => ground.registerUser(a)).toThrow();
+    });
+  });
+
+  it("should return a user object if valid username is passed", () => {
+    const result = ground.registerUser("Ben");
+    expect(result).toMatchObject({ username: "Ben" });
+    expect(result.id).toBeGreaterThan(0);
+  });
+});
