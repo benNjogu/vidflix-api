@@ -118,19 +118,11 @@ describe("fizzbuzz", () => {
 
 describe("applyDiscount", () => {
   it("should apply 10% discount if customer has more than 10 points", () => {
-    const mockFunction = jest.fn();
-    //mockFunction.mockReturnValue(1);
-    mockFunction.mockResolvedValue(1);
-    mockFunction.mockRejectedValue(new Error("..."));
-    const result = await mockFunction();
-
-    db.getCustomerSync = function (customerId) {
-      console.log("Fake reading customer...");
-      return { id: customerId, points: 11 };
-    };
+    db.getCustomerSync = jest.fn().mockReturnValue({ id: 1, points: 11 });
 
     const order = { customerId: 1, totalPrice: 10 };
     ground.applyDiscount(order);
+
     expect(order.totalPrice).toBe(9);
   });
 });
