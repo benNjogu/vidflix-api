@@ -46,3 +46,4 @@ module.exports.applyDiscount = function (order) {
 
   if (customer.points > 10) order.totalPrice *= 0.9;
 };
+
