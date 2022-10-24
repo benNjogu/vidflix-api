@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const winston = require("winston");
+const config = require("config");
 
 module.exports = function () {
-  mongoose
-    .connect("mongodb://localhost/vidflix")
-    .then(() => winston.info("Connected to the database..."));
+  const db = config.get("db");
+  mongoose.connect(db).then(() => winston.info(`Connected to the ${db}...`));
 };
