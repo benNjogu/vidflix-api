@@ -10,7 +10,7 @@ describe("/vidflix/api/genres", () => {
     server.close;
   });
 
-  describe("GET /vidflix/api/genres", () => {
+  describe("GET /", () => {
     it("should return all genres", async () => {
       const res = await request(server).get("/vidflix/api/genres");
       expect(res.status).toBe(200);
