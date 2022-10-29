@@ -36,5 +36,15 @@ describe("/vidflix/api/genres", () => {
       expect(res.status).toBe(200);
       expect(res.body).toHaveProperty("name", genre.name);
     });
+
+    it("should return a 404 error if invalid id is passed", async () => {
+      /*const genre = new Genre({ name: "genre1" });
+      await genre.save();*/
+
+      const res = await request(server).get("/vidflix/api/genres/1");
+
+      expect(res.status).toBe(404);
+      //expect(res.body).toHaveProperty("name", genre.name);
+    });
   });
 });
