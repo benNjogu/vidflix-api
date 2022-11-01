@@ -47,4 +47,14 @@ describe("/vidflix/api/genres", () => {
       //expect(res.body).toHaveProperty("name", genre.name);
     });
   });
+
+  describe("POST /", () => {
+    it("should return a 401 if client is not logged in", async () => {
+      const res = await request(server)
+        .post("/vidflix/api/genres")
+        .send({ name: "genre1" });
+
+      expect(res.status).toBe(401);
+    });
+  });
 });
