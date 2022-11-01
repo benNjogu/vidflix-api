@@ -80,5 +80,29 @@ describe("/vidflix/api/genres", () => {
 
       expect(res.status).toBe(400);
     });
+
+    it("should save the genre if its valid", async () => {
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/vidflix/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: "genre1" });
+
+      const genre = await Genre.find({ name: "genre1" });
+      expect(genre).not.toBeNull();
+    });
+
+    it("should return the genre if its valid", async () => {
+      const token = new User().generateAuthToken();
+
+      const res = await request(server)
+        .post("/vidflix/api/genres")
+        .set("x-auth-token", token)
+        .send({ name: "genre1" });
+
+      expect(res.body).toHaveProperty("_id");
+      expect(res.body).toHaveProperty("name", "genre1");
+    });
   });
 });
