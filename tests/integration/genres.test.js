@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const request = require("supertest");
 const { Genre } = require("../../models/genre");
 const { User } = require("../../models/user");
@@ -38,11 +39,11 @@ describe("/vidflix/api/genres", () => {
       expect(res.body).toHaveProperty("name", genre.name);
     });
 
-    it("should return a 404 error if invalid id is passed", async () => {
+    it("should return a 404 error if no genre with given id exists", async () => {
       /*const genre = new Genre({ name: "genre1" });
       await genre.save();*/
-
-      const res = await request(server).get("/vidflix/api/genres/1");
+      const id = mongoose.Types.ObjectId();
+      const res = await request(server).get("/vidflix/api/genres/" + id);
 
       expect(res.status).toBe(404);
       //expect(res.body).toHaveProperty("name", genre.name);
