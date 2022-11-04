@@ -4,6 +4,7 @@ const genres = require("../routes/genres");
 const customers = require("../routes/customers");
 const movies = require("../routes/movies");
 const rentals = require("../routes/rentals");
+const returns = require("../routes/returns");
 const users = require("../routes/users");
 const auth = require("../routes/auth");
 const error = require("../middleware/error");
@@ -15,6 +16,7 @@ module.exports = function (app) {
   app.use("/vidflix/api/customers", customers);
   app.use("/vidflix/api/movies", movies);
   app.use("/vidflix/api/rentals", rentals);
+  app.use("/vidflix/api/returns", returns);
   app.use("/vidflix/api/users", users);
   app.use("/vidflix/api/auth", auth);
   app.use(error);
