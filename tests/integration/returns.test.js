@@ -88,4 +88,13 @@ describe("/vidflix/api/returns", () => {
 
     expect(res.status).toBe(200);
   });
+
+  it("should set the returnDate if the input is valid", async () => {
+    const res = await exec();
+
+    const rentalInDB = await Rental.findById(rental._id);
+    const diff = new Date() - rentalInDB.dateReturned;
+
+    expect(diff).toBeLessThan(10 * 10000);
+  });
 });
