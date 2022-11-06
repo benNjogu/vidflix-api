@@ -45,11 +45,6 @@ describe("/vidflix/api/returns", () => {
     await server.close();
   });
 
-  it("should work", async () => {
-    const result = await Rental.findById(rental._id);
-    expect(result).not.toBeNull();
-  });
-
   it("should return 401 if client is not logged in", async () => {
     token = "";
     const res = await exec();
@@ -69,5 +64,13 @@ describe("/vidflix/api/returns", () => {
     const res = await exec();
 
     expect(res.status).toBe(400);
+  });
+
+  it("should return 404 if no rental found for the customer/movie", async () => {
+    await Rental.remove({});
+
+    const res = await exec();
+
+    expect(res.status).toBe(404);
   });
 });
