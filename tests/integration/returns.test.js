@@ -1,6 +1,7 @@
 const request = require("supertest");
 const moment = require("moment");
 const { Rental } = require("../../models/rental");
+const { Movie } = require("../../models/movie");
 const { User } = require("../../models/user");
 const mongoose = require("mongoose");
 
@@ -9,6 +10,7 @@ describe("/vidflix/api/returns", () => {
   let customerId;
   let movieId;
   let rental;
+  let movie;
   let token;
 
   const exec = async () => {
@@ -24,6 +26,15 @@ describe("/vidflix/api/returns", () => {
     customerId = mongoose.Types.ObjectId();
     movieId = mongoose.Types.ObjectId();
     token = new User().generateAuthToken();
+
+    movie = new Movie({
+      _id: movieId,
+      title: 12345,
+      dailyRentalRate: 2,
+      genre: { name: 12345 },
+      numberInStock: 10,
+    });
+    await movie.save();
 
     rental = new Rental({
       customer: {
@@ -43,6 +54,7 @@ describe("/vidflix/api/returns", () => {
 
   afterEach(async () => {
     await Rental.remove({});
+    await Movie.remove({});
     await server.close();
   });
 
@@ -106,6 +118,13 @@ describe("/vidflix/api/returns", () => {
     await exec();
 
     const rentalInDB = await Rental.findById(rental._id);
-    expect(rentalInDB.rentalFee).toBeDefined();
+    expect(rentalInDB.rentalFee).toBe(14);
+  });
+
+  it("should increase the movie stock if the input is valid", async () => {
+    await exec();
+
+    const movieInDB = await Movie.findById(movieId);
+    expect(movieInDB.numberInStock).toBe(movie.numberInStock + 1);
   });
 });
