@@ -1,4 +1,5 @@
 const request = require("supertest");
+const moment = require("moment");
 const { Rental } = require("../../models/rental");
 const { User } = require("../../models/user");
 const mongoose = require("mongoose");
@@ -96,5 +97,15 @@ describe("/vidflix/api/returns", () => {
     const diff = new Date() - rentalInDB.dateReturned;
 
     expect(diff).toBeLessThan(10 * 10000);
+  });
+
+  it("should set the rentalfee if the input is valid", async () => {
+    rental.dateOut = moment().add(-7, "days").toDate(); //gives a moment object that is 7 days before
+    await rental.save();
+
+    await exec();
+
+    const rentalInDB = await Rental.findById(rental._id);
+    expect(rentalInDB.rentalFee).toBeDefined();
   });
 });
