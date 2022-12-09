@@ -1,3 +1,6 @@
 {
-  "jwtPrivateKey": "1234"
+  "jwtPrivateKey": "1234",
+  "db": "mongodb://localhost/vidflix",
+  "port": "3000",
+  "requiresAuth": true
 }
